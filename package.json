@@ -1,0 +1,26 @@
+{
+  "name": "ipgeo",
+  "version": "1.0.0",
+  "description": "<p>IP Geolocation with MaxMind databases</p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulB-H/ipgeo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulB-H/ipgeo/issues"
+  },
+  "homepage": "https://github.com/PaulB-H/ipgeo#readme",
+  "dependencies": {
+    "@maxmind/geoip2-node": "^3.1.0",
+    "express": "^4.17.1",
+    "express-useragent": "^1.0.15",
+    "lodash": "^4.17.21",
+    "request-ip": "^2.1.3"
+  }
+}
