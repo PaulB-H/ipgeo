@@ -15,7 +15,10 @@ const serverStartTime = serverStartDateObj.toLocaleTimeString();
 let hasVisited;
 let lastVisited;
 
-let analyticDataObj;
+let analyticDataObj = {
+  pathHits: [{ path: "/", hits: 0 }],
+  iplog: [{ ip: "888.888.888", visits: 0, lastVisit: 1627065794481 }],
+};
 
 let backupPath = path.join(__dirname, "analytic_backups");
 
