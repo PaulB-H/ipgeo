@@ -49,6 +49,8 @@ if (!fs.existsSync(backupPath)) {
   }
 }
 
+app.use(useragent.express());
+
 app.use((req, res, next) => {
   console.log("Middleware hit, request for: " + req.url);
   const clientIp = requestIp.getClientIp(req);
