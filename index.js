@@ -25,4 +25,29 @@ if (!fs.existsSync(backupPath)) {
   console.log(`analytic_backups dir created at ${backupPath}`);
 } else {
   console.log(`analytic_backups dir already exists at ${backupPath}`);
+
+  if (!fs.existsSync(path.join(backupPath, "analytic_data.json"))) {
+    console.log("No existing backup found");
+  } else {
+    console.log("Existing backup found, attempting to read...");
+
+    let previousBackupJSON = fs.readFileSync(
+      path.join(backupPath, "analytic_data.json")
+    );
+
+    try {
+      let parsedBackup = JSON.parse(previousBackupJSON);
+      analyticDataArr = parsedBackup;
+      console.log(
+        `Data parsed, ${analyticDataArr.length} items loaded into analyticDataArr`
+      );
+    } catch (err) {
+      console.error("Err parsing JSON...");
+      // process.exit();
+    }
+  }
 }
+
+app.listen(8090, () => {
+  console.log("server up on 8090");
+});
