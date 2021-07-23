@@ -53,8 +53,14 @@ app.use(useragent.express());
 
 app.use((req, res, next) => {
   console.log("Middleware hit, request for: " + req.url);
+
   const clientIp = requestIp.getClientIp(req);
   console.log(clientIp);
+
+  console.log(req.useragent.browser);
+  console.log(req.useragent.version);
+  console.log(req.useragent.os);
+
   next();
 });
 
