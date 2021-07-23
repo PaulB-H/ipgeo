@@ -7,3 +7,12 @@ const requestIp = require("reqiest-ip");
 const useragent = require("express-useragent");
 const Reader = require("@maxmind/geoip2-node").Reader;
 const CronJob = require("cron").CronJob;
+
+const serverStartDateObj = new Date();
+const serverStartDate = serverStartDateObj.toLocaleDateString();
+const serverStartTime = serverStartDateObj.toLocaleTimeString();
+
+let hasVisited;
+let lastVisited;
+
+let analyticDataArr = [];
