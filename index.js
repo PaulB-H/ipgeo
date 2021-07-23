@@ -15,7 +15,7 @@ const serverStartTime = serverStartDateObj.toLocaleTimeString();
 let hasVisited;
 let lastVisited;
 
-let analyticDataArr = [];
+let analyticDataObj;
 
 let backupPath = path.join(__dirname, "analytic_backups");
 
