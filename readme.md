@@ -4,7 +4,7 @@
 
 <ul>
   <li>Get IP Geolocation data without relying on a third-party API</li>
-  <li>Learn how to build custom analytic functionaluty</li>
+  <li>Learn how to build custom analytic functionality</li>
   <li>Use FS with JSON files to log the data</li>
 </ul>
 
