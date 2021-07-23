@@ -48,6 +48,8 @@ if (!fs.existsSync(backupPath)) {
   }
 }
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.listen(8090, () => {
   console.log("server up on 8090");
 });
