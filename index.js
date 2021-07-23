@@ -48,6 +48,11 @@ if (!fs.existsSync(backupPath)) {
   }
 }
 
+app.use((req, res, next) => {
+  console.log("Middleware hit, request for: " + req.url);
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("*", (req, res) => {
