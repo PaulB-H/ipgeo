@@ -43,7 +43,7 @@ if (!fs.existsSync(backupPath)) {
       );
     } catch (err) {
       console.error("Err parsing JSON...");
-      // process.exit();
+      process.exit();
     }
   }
 }
