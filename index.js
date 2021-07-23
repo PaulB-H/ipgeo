@@ -36,11 +36,9 @@ if (!fs.existsSync(backupPath)) {
     );
 
     try {
-      let parsedBackup = JSON.parse(previousBackupJSON);
-      analyticDataArr = parsedBackup;
-      console.log(
-        `Data parsed, ${analyticDataArr.length} items loaded into analyticDataArr`
-      );
+      let previousBackupParse = JSON.parse(previousBackupJSON);
+      console.log("Data read success");
+      analyticDataObj = previousBackupParse;
     } catch (err) {
       console.error("Err parsing JSON...");
       process.exit();
