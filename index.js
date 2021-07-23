@@ -54,6 +54,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "404.html"));
+});
+
 app.listen(8090, () => {
   console.log("server up on 8090");
 });
