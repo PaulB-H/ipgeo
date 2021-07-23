@@ -22,6 +22,7 @@
     "express": "^4.17.1",
     "express-useragent": "^1.0.15",
     "lodash": "^4.17.21",
+    "nodemon": "^2.0.12",
     "request-ip": "^2.1.3"
   }
 }
