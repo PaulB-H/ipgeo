@@ -15,9 +15,14 @@ const serverStartTime = serverStartDateObj.toLocaleTimeString();
 let hasVisited;
 let lastVisited;
 
+// let analyticDataObj = {
+//   pathHits: [{ path: "/", hits: 0 }],
+//   iplog: [{ ip: "888.888.888", visits: 0, lastVisit: 1627065794481 }],
+// };
+
 let analyticDataObj = {
-  pathHits: [{ path: "/", hits: 0 }],
-  iplog: [{ ip: "888.888.888", visits: 0, lastVisit: 1627065794481 }],
+  pathHits: [],
+  iplog: [],
 };
 
 let backupPath = path.join(__dirname, "analytic_backups");
@@ -52,15 +57,45 @@ if (!fs.existsSync(backupPath)) {
 app.use(useragent.express());
 
 app.use((req, res, next) => {
-  console.log("Middleware hit, request for: " + req.url);
+  if (req.url === "/") {
+    console.log("Middleware hit, request for: " + req.url);
 
-  const clientIp = requestIp.getClientIp(req);
-  console.log(clientIp);
+    const clientIp = requestIp.getClientIp(req);
+    console.log(clientIp);
 
-  console.log(req.useragent.browser);
-  console.log(req.useragent.version);
-  console.log(req.useragent.os);
+    console.log(req.useragent.browser);
+    console.log(req.useragent.version);
+    console.log(req.useragent.os);
 
+    let pathFound = false;
+    analyticDataObj.pathHits.forEach((item, index) => {
+      if (item.path === req.url) {
+        pathFound = true;
+        item.hits++;
+      }
+    });
+    if (!pathFound) {
+      analyticDataObj.pathHits.push({ path: req.url, hits: 1 });
+    }
+
+    let ipFound = false;
+    analyticDataObj.iplog.forEach((item, index) => {
+      if (item.ip === clientIp) {
+        ipFound = true;
+        item.visits++;
+        item.lastVisit = Date.now();
+      }
+    });
+    if (!ipFound) {
+      analyticDataObj.iplog.push({
+        ip: clientIp,
+        visits: 1,
+        lastVisit: Date.now(),
+      });
+    }
+
+    console.log(analyticDataObj);
+  }
   next();
 });
 
