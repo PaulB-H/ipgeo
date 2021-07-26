@@ -56,8 +56,11 @@ if (!fs.existsSync(backupPath)) {
 
 app.use(useragent.express());
 
+let urlsToTrack = new Set();
+urlsToTrack.add("/");
+
 app.use((req, res, next) => {
-  if (req.url === "/") {
+  if (urlsToTrack.has(req.url)) {
     console.log("Middleware hit, request for: " + req.url);
 
     const clientIp = requestIp.getClientIp(req);
