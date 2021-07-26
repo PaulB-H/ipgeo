@@ -15,9 +15,27 @@ const serverStartTime = serverStartDateObj.toLocaleTimeString();
 let hasVisited;
 let lastVisited;
 
-// let analyticDataObj = {
-//   pathHits: [{ path: "/", hits: 0 }],
-//   iplog: [{ ip: "888.888.888", visits: 0, lastVisit: 1627065794481 }],
+// new daily analytic object structure
+// const analyticDataObj = {
+//   date: Date.now(),
+//   sessions: [ {
+//     ip: "888.888.888",
+//     user: null || "String",
+//     sessionStartTime: UNIXTimeStamp,
+//     resourceRequests: [{ url: "/", requests: 1 }, { url: "/api", requests: 1}, ...etc ],
+//     sessionEndTime: UNIXTimeStamp,
+//     initialScreenWidth: "1920px",
+//     initialScreenHeight: "1080px",
+//     browser: "String",
+//     browserVersion: "String",
+//     os: "String",
+//     country: "String",
+//     city: "String",
+//     lat: Int,
+//     lon: Int,
+//   }],
+//   pathHits: [{ path: "/", hits: 1 }, { path: "/api", hits: 0 } ],
+//   iplog: [{ ip: "888.888.888", sessions: 1, lastVisit: 1627065794481 }]
 // };
 
 let analyticDataObj = {
