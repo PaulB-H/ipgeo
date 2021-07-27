@@ -16,32 +16,50 @@ let hasVisited;
 let lastVisited;
 
 // new daily analytic object structure
-// const analyticDataObj = {
-//   date: Date.now(),
-//   sessions: [ {
-//     ip: "888.888.888",
-//     user: null || "String",
-//     sessionStartTime: UNIXTimeStamp,
-//     resourceRequests: [{ url: "/", requests: 1 }, { url: "/api", requests: 1}, ...etc ],
-//     sessionEndTime: UNIXTimeStamp,
-//     initialScreenWidth: "1920px",
-//     initialScreenHeight: "1080px",
-//     browser: "String",
-//     browserVersion: "String",
-//     os: "String",
-//     country: "String",
-//     city: "String",
-//     lat: Int,
-//     lon: Int,
-//   }],
-//   pathHits: [{ path: "/", hits: 1 }, { path: "/api", hits: 0 } ],
-//   iplog: [{ ip: "888.888.888", sessions: 1, lastVisit: 1627065794481 }]
-// };
+class DailyAnalyticObj {
+  constructor() {
+    this.date = Date.now();
+    this.sessions = [];
+    this.resourceRequests = [];
+    this.iplog = [];
+  }
+}
 
-let analyticDataObj = {
-  pathHits: [],
-  iplog: [],
-};
+let todaysAnalyticObj = new DailyAnalyticObj();
+
+class NewSession {
+  constructor(ip, browser, browserVersion, os, country, city, lat, lon) {
+    this.ip = ip;
+    this.user = null;
+    this.sessionStartTime = Date.now();
+    this.resourceRequests = [];
+    this.sessionEndTime = null;
+    this.initialScreenWidth = null;
+    this.initialScreenHeight = null;
+    this.browser = browser;
+    this.browserVersion = browserVersion;
+    this.os = os;
+    this.country = country;
+    this.city = city;
+    this.lat = lat;
+    this.lon = lon;
+  }
+}
+
+class ResourceRequest {
+  constructor(url) {
+    this.url = url;
+    this.hits = 1;
+  }
+}
+
+class IPCapture {
+  constructor(ip) {
+    this.ip = ip;
+    this.sessions = 1;
+    this.lastVisit = Date.now();
+  }
+}
 
 let backupPath = path.join(__dirname, "analytic_backups");
 
