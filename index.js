@@ -101,15 +101,13 @@ urlsToTrack.add("/");
 let analyticDataObj = { pathHits: [], iplog: [] };
 
 app.use((req, res, next) => {
+  let { browser, version, os } = req.useragent;
+
   if (urlsToTrack.has(req.url)) {
     console.log("Middleware hit, request for: " + req.url);
 
     const clientIp = requestIp.getClientIp(req);
     console.log(clientIp);
-
-    console.log(req.useragent.browser);
-    console.log(req.useragent.version);
-    console.log(req.useragent.os);
 
     let pathFound = false;
     analyticDataObj.pathHits.forEach((item, index) => {
