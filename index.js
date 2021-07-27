@@ -98,6 +98,8 @@ app.use(useragent.express());
 let urlsToTrack = new Set();
 urlsToTrack.add("/");
 
+let analyticDataObj = { pathHits: [], iplog: [] };
+
 app.use((req, res, next) => {
   if (urlsToTrack.has(req.url)) {
     console.log("Middleware hit, request for: " + req.url);
