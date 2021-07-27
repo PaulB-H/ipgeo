@@ -28,21 +28,24 @@ class DailyAnalyticObj {
 let todaysAnalyticObj = new DailyAnalyticObj();
 
 class NewSession {
-  constructor(ip, browser, browserVersion, os, country, city, lat, lon) {
-    this.ip = ip;
-    this.user = null;
+  constructor(ip, browser, browserVersion, os) {
     this.sessionStartTime = Date.now();
-    this.resourceRequests = [];
-    this.sessionEndTime = null;
-    this.initialScreenWidth = null;
-    this.initialScreenHeight = null;
+
+    this.ip = ip;
     this.browser = browser;
     this.browserVersion = browserVersion;
     this.os = os;
-    this.country = country;
-    this.city = city;
-    this.lat = lat;
-    this.lon = lon;
+
+    this.resourceRequests = [];
+
+    this.initialScreenWidth = null;
+    this.initialScreenHeight = null;
+    this.country = null;
+    this.city = null;
+    this.lat = null;
+    this.lon = null;
+
+    this.sessionEndTime = null;
   }
 }
 
