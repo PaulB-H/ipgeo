@@ -101,13 +101,23 @@ urlsToTrack.add("/");
 let analyticDataObj = { pathHits: [], iplog: [] };
 
 app.use((req, res, next) => {
-  let { browser, version, os } = req.useragent;
+  const { browser, version, os } = req.useragent;
+  const clientIp = requestIp.getClientIp(req);
+
+  const existingSession = todaysAnalyticObj.sessions.find(
+    (element) => element.ip === clientIp
+  );
+
+  if (!existingSession) {
+    console.log("No existing session");
+    let newSession = new NewSession(clientIp, browser, version, os);
+    todaysAnalyticObj.sessions.push(newSession);
+  } else {
+    console.log("Existing session found");
+  }
 
   if (urlsToTrack.has(req.url)) {
     console.log("Middleware hit, request for: " + req.url);
-
-    const clientIp = requestIp.getClientIp(req);
-    console.log(clientIp);
 
     let pathFound = false;
     analyticDataObj.pathHits.forEach((item, index) => {
