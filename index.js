@@ -130,8 +130,6 @@ app.use(async (req, res, next) => {
         console.log(err);
       });
 
-    console.log(`Country is : ${country}`);
-
     let newSession = new NewSession(
       clientIp,
       browser,
