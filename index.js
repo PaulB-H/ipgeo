@@ -37,7 +37,7 @@ class NewSession {
     this.browserVersion = browserVersion;
     this.os = os;
 
-    this.resourceRequests = [];
+    this.sessionRequests = [];
 
     this.initialScreenWidth = null;
     this.initialScreenHeight = null;
