@@ -109,16 +109,13 @@ app.use((req, res, next) => {
   );
 
   if (!existingSession) {
-    console.log("No existing session");
     let newSession = new NewSession(clientIp, browser, version, os);
     todaysAnalyticObj.sessions.push(newSession);
   } else {
-    console.log("Existing session found");
+    // console.log("Existing session found");
   }
 
   if (urlsToTrack.has(req.url)) {
-    console.log("Middleware hit, request for: " + req.url);
-
     let pathFound = false;
     analyticDataObj.pathHits.forEach((item, index) => {
       if (item.path === req.url) {
@@ -145,8 +142,6 @@ app.use((req, res, next) => {
         lastVisit: Date.now(),
       });
     }
-
-    console.log(analyticDataObj);
   }
   next();
 });
