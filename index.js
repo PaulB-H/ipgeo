@@ -40,10 +40,10 @@ class NewSession {
 
     this.initialScreenWidth = null;
     this.initialScreenHeight = null;
-    this.country = null;
-    this.city = null;
-    this.lat = null;
-    this.lon = null;
+    this.country = country;
+    this.city = city;
+    this.lat = lat;
+    this.lon = lon;
 
     this.sessionEndTime = null;
   }
