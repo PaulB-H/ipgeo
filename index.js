@@ -100,7 +100,7 @@ urlsToTrack.add("/");
 
 let analyticDataObj = { pathHits: [], iplog: [] };
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   const { browser, version, os } = req.useragent;
   const clientIp = requestIp.getClientIp(req);
 
