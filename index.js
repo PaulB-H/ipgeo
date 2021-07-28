@@ -112,7 +112,37 @@ app.use(async (req, res, next) => {
   );
 
   if (!existingSession) {
-    let newSession = new NewSession(clientIp, browser, version, os);
+    let country = null;
+    let city = null;
+    let latitude = null;
+    let longitude = null;
+
+    await Reader.open("./GeoLite2-City.mmdb")
+      .then((reader) => {
+        const response = reader.city(clientIp);
+
+        country = response.country.names.en;
+        city = response.city.names.en;
+        latitude = response.location.latitude;
+        longitude = response.location.longitude;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    console.log(`Country is : ${country}`);
+
+    let newSession = new NewSession(
+      clientIp,
+      browser,
+      version,
+      os,
+      country,
+      city,
+      latitude,
+      longitude
+    );
+
     todaysAnalyticObj.sessions.push(newSession);
   } else {
     // console.log("Existing session found");
