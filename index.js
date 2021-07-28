@@ -28,7 +28,7 @@ class DailyAnalyticObj {
 let todaysAnalyticObj = new DailyAnalyticObj();
 
 class NewSession {
-  constructor(ip, browser, browserVersion, os) {
+  constructor(ip, browser, browserVersion, os, country, city, lat, lon) {
     this.sessionStartTime = Date.now();
 
     this.ip = ip;
