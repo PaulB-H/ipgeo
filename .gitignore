@@ -1,3 +1,4 @@
 node_modules/
 GeoLite2-City.mmdb
 analytic_data.json
+.env
