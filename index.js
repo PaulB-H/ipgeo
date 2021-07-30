@@ -147,33 +147,11 @@ app.use(async (req, res, next) => {
   );
 
   if (!existingSession) {
-    let country = null;
-    let city = null;
-    let latitude = null;
-    let longitude = null;
-
-    await Reader.open("./GeoLite2-City.mmdb")
-      .then((reader) => {
-        const response = reader.city(clientIp);
-
-        country = response.country.names.en;
-        city = response.city.names.en;
-        latitude = response.location.latitude;
-        longitude = response.location.longitude;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    let newSession = new NewSession(
+    let newSession = await createNewSessionAsync(
       clientIp,
       browser,
       version,
-      os,
-      country,
-      city,
-      latitude,
-      longitude
+      os
     );
 
     todaysAnalyticObj.activeSessions.push(newSession);
