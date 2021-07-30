@@ -32,6 +32,7 @@ let todaysAnalyticObj = new DailyAnalyticObj();
 class NewSession {
   constructor(ip, browser, browserVersion, os, country, city, lat, lon) {
     this.sessionStartTime = Date.now();
+    this.lastAction = Date.now();
 
     this.ip = ip;
     this.browser = browser;
