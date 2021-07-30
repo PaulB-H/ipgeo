@@ -20,7 +20,8 @@ let lastVisited;
 class DailyAnalyticObj {
   constructor() {
     this.date = Date.now();
-    this.sessions = [];
+    this.activeSessions = [];
+    this.closedSessions = [];
     this.resourceRequests = [];
     this.iplog = [];
   }
