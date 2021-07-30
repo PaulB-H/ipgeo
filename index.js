@@ -108,7 +108,7 @@ app.use(async (req, res, next) => {
   // const clientIp = requestIp.getClientIp(req); // FOR PROD
   const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
 
-  const existingSession = todaysAnalyticObj.sessions.find(
+  const existingSession = todaysAnalyticObj.activeSessions.find(
     (element) => element.ip === clientIp
   );
 
@@ -142,7 +142,7 @@ app.use(async (req, res, next) => {
       longitude
     );
 
-    todaysAnalyticObj.sessions.push(newSession);
+    todaysAnalyticObj.activeSessions.push(newSession);
   } else {
     // console.log("Existing session found");
   }
