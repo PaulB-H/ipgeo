@@ -103,6 +103,39 @@ urlsToTrack.add("/");
 
 let analyticDataObj = { pathHits: [], iplog: [] };
 
+let createNewSessionAsync = async (clientIp, browser, version, os) => {
+  let country = null;
+  let city = null;
+  let latitude = null;
+  let longitude = null;
+
+  await Reader.open("./GeoLite2-City.mmdb")
+    .then((reader) => {
+      const response = reader.city(clientIp);
+
+      country = response.country.names.en;
+      city = response.city.names.en;
+      latitude = response.location.latitude;
+      longitude = response.location.longitude;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  let newSession = new NewSession(
+    clientIp,
+    browser,
+    version,
+    os,
+    country,
+    city,
+    latitude,
+    longitude
+  );
+
+  return newSession;
+};
+
 app.use(async (req, res, next) => {
   const { browser, version, os } = req.useragent;
 
