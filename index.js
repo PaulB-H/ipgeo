@@ -70,16 +70,18 @@ class IPCapture {
 let backupPath = path.join(__dirname, "analytic_backups");
 
 if (!fs.existsSync(backupPath)) {
-  console.log("dir not found, creating...");
+  // console.log("analytic_backups dir not found, creating...");
+
   fs.mkdirSync(backupPath);
+
   console.log(`analytic_backups dir created at ${backupPath}`);
 } else {
-  console.log(`analytic_backups dir already exists at ${backupPath}`);
+  // console.log(`analytic_backups dir already exists at ${backupPath}`);
 
   if (!fs.existsSync(path.join(backupPath, "analytic_data.json"))) {
     console.log("No existing backup found");
   } else {
-    console.log("Existing backup found, attempting to read...");
+    // console.log("Existing backup found, attempting to read...");
 
     let previousBackupJSON = fs.readFileSync(
       path.join(backupPath, "analytic_data.json")
@@ -87,10 +89,13 @@ if (!fs.existsSync(backupPath)) {
 
     try {
       let previousBackupParse = JSON.parse(previousBackupJSON);
-      console.log("Data read success");
+
+      // console.log("Data read and parsed");
+
       analyticDataObj = previousBackupParse;
     } catch (err) {
-      console.error("Err parsing JSON...");
+      // console.error("Err parsing JSON... Exiting");
+
       process.exit();
     }
   }
@@ -143,7 +148,7 @@ app.use(async (req, res, next) => {
   const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
 
   const existingSession = todaysAnalyticObj.activeSessions.find(
-    (element) => element.ip === clientIp
+    (item) => item.ip === clientIp
   );
 
   if (!existingSession) {
