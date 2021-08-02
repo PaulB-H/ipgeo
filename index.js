@@ -194,6 +194,9 @@ app.use(async (req, res, next) => {
     } else {
       // console.log("Session open... Extending");
 
+      let newRequest = new ResourceRequest(req.url);
+      existingSession.sessionRequests.push(newRequest);
+
       existingSession.lastAction = Date.now();
     }
   }
