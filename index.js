@@ -55,7 +55,7 @@ class NewSession {
 class ResourceRequest {
   constructor(url) {
     this.url = url;
-    this.hits = 1;
+    this.timeRequested = Date.now();
   }
 }
 
