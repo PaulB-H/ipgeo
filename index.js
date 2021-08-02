@@ -159,6 +159,9 @@ app.use(async (req, res, next) => {
       os
     );
 
+    let newRequest = new ResourceRequest(req.url);
+    newSession.sessionRequests.push(newRequest);
+
     todaysAnalyticObj.activeSessions.push(newSession);
   } else {
     // console.log("Existing session found");
@@ -183,6 +186,9 @@ app.use(async (req, res, next) => {
         version,
         os
       );
+
+      let newRequest = new ResourceRequest(req.url);
+      newSession.sessionRequests.push(newRequest);
 
       todaysAnalyticObj.activeSessions.push(newSession);
     } else {
