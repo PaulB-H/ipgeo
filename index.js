@@ -103,11 +103,6 @@ if (!fs.existsSync(backupPath)) {
 
 app.use(useragent.express());
 
-let urlsToTrack = new Set();
-urlsToTrack.add("/");
-
-let analyticDataObj = { pathHits: [], iplog: [] };
-
 let createNewSessionAsync = async (clientIp, browser, version, os) => {
   let country = null;
   let city = null;
@@ -201,34 +196,6 @@ app.use(async (req, res, next) => {
     }
   }
 
-  if (urlsToTrack.has(req.url)) {
-    let pathFound = false;
-    analyticDataObj.pathHits.forEach((item, index) => {
-      if (item.path === req.url) {
-        pathFound = true;
-        item.hits++;
-      }
-    });
-    if (!pathFound) {
-      analyticDataObj.pathHits.push({ path: req.url, hits: 1 });
-    }
-
-    let ipFound = false;
-    analyticDataObj.iplog.forEach((item, index) => {
-      if (item.ip === clientIp) {
-        ipFound = true;
-        item.visits++;
-        item.lastVisit = Date.now();
-      }
-    });
-    if (!ipFound) {
-      analyticDataObj.iplog.push({
-        ip: clientIp,
-        visits: 1,
-        lastVisit: Date.now(),
-      });
-    }
-  }
   next();
 });
 
