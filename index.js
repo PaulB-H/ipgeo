@@ -92,7 +92,7 @@ if (!fs.existsSync(backupPath)) {
 
       // console.log("Data read and parsed");
 
-      analyticDataObj = previousBackupParse;
+      todaysAnalyticObj = previousBackupParse;
     } catch (err) {
       // console.error("Err parsing JSON... Exiting");
 
