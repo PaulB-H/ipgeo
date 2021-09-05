@@ -74,6 +74,10 @@
       </h4> -->
     </main>
     <script>
+      const sendScreenSize = () => {
+        fetch(`/screensize/${window.innerWidth}/height/${window.innerHeight}`);
+      };
+      sendScreenSize();
       // "use strict";
 
       // const countdown = document.getElementById("countdown");
