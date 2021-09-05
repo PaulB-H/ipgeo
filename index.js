@@ -259,6 +259,25 @@ app.get("/screensize/:width/height/:height", (req, res) => {
 });
 
 app.get("*", (req, res) => {
+  // console.log("404 hit");
+
+  let reqUrl;
+
+  if (req.url.length > 25) {
+    // console.log("req.url longer than 25 chars, truncating");
+
+    for (let i = 1; i < 25; i++) {
+      reqUrl += req.url.charAt(i);
+    }
+  } else {
+    reqUrl = req.url;
+  }
+
+  // const clientIp = requestIp.getClientIp(req); // FOR PROD
+  const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
+
+  logResourceRequest(clientIp, "404 - " + reqUrl);
+
   res.sendFile(path.join(__dirname, "public", "404.html"));
 });
 
