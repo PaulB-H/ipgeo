@@ -199,7 +199,7 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"), { index: false }));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "404.html"));
