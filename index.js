@@ -136,6 +136,21 @@ let createNewSessionAsync = async (clientIp, browser, version, os) => {
   return newSession;
 };
 
+const logResourceRequest = (clientIp, resource) => {
+  // console.log("logResourceRequest called");
+
+  const existingSession = todaysAnalyticObj.activeSessions.find(
+    (item) => item.ip === clientIp
+  );
+
+  if (existingSession) {
+    let newRequest = new ResourceRequest(resource);
+    existingSession.sessionRequests.push(newRequest);
+  }
+
+  // console.log(existingSession);
+};
+
 app.use(async (req, res, next) => {
   const { browser, version, os } = req.useragent;
 
