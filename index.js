@@ -205,6 +205,44 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+app.get("/screensize/:width/height/:height", (req, res) => {
+  // console.log("screensize route hit");
+
+  if (req.params.width % 1 !== 0 || req.params.height % 1 !== 0) {
+    // console.log("Screen size cannot be decimal");
+    res.end();
+  }
+
+  if (req.params.width <= 0 || req.params.height <= 0) {
+    // console.log("Screen size cannot be negative");
+    res.end();
+  }
+
+  if (req.params.width > 10000 || req.params.height > 10000) {
+    // console.log("Screen size cannot be > 10000");
+    res.end();
+  }
+
+  // const clientIp = requestIp.getClientIp(req); // FOR PROD
+  const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
+
+  const existingSession = todaysAnalyticObj.activeSessions.find(
+    (item) => item.ip === clientIp
+  );
+
+  if (
+    existingSession &&
+    existingSession.initialScreenWidth === null &&
+    existingSession.initialScreenHeight === null
+  ) {
+    // console.log("Existing session with no screen size found");
+    existingSession.initialScreenWidth = req.params.width;
+    existingSession.initialScreenHeight = req.params.height;
+  }
+
+  res.end();
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "404.html"));
 });
