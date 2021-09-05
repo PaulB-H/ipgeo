@@ -23,7 +23,7 @@ class DailyAnalyticObj {
     this.activeSessions = [];
     this.closedSessions = [];
     this.resourceRequests = [];
-    this.iplog = [];
+    this.iplog = new Set();
   }
 }
 
