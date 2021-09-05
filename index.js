@@ -208,6 +208,11 @@ app.use(async (req, res, next) => {
 app.use(express.static(path.join(__dirname, "public"), { index: false }));
 
 app.get("/", (req, res) => {
+  // const clientIp = requestIp.getClientIp(req); // FOR PROD
+  const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
+
+  logResourceRequest(clientIp, "/");
+
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
@@ -235,6 +240,10 @@ app.get("/screensize/:width/height/:height", (req, res) => {
   const existingSession = todaysAnalyticObj.activeSessions.find(
     (item) => item.ip === clientIp
   );
+
+  if (existingSession) {
+    logResourceRequest(clientIp, "/screensize");
+  }
 
   if (
     existingSession &&
