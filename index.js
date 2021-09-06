@@ -164,6 +164,10 @@ app.use(async (req, res, next) => {
   // const clientIp = requestIp.getClientIp(req); // FOR PROD
   const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
 
+  if (!todaysAnalyticObj.iplog.find((item) => item === clientIp)) {
+    todaysAnalyticObj.iplog.push(clientIp);
+  }
+
   const existingSession = todaysAnalyticObj.activeSessions.find(
     (item) => item.ip === clientIp
   );
