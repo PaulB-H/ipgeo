@@ -151,6 +151,13 @@ const logResourceRequest = (clientIp, resource) => {
   // console.log(existingSession);
 };
 
+// Session Management
+// Add IP to log
+// Check if session exists for IP in analytic object
+// If false, create new session
+// If true, check if session should be expired
+// --> If expired, close old then create new session
+// --> If not expired, update session last action time
 app.use(async (req, res, next) => {
   const { browser, version, os } = req.useragent;
 
