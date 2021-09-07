@@ -269,6 +269,19 @@ app.get("/screensize/:width/height/:height", (req, res) => {
   res.end();
 });
 
+app.get("/analytics", (req, res) => {
+  class PublicAnalyticObj {
+    constructor() {
+      this.date = todaysAnalyticObj.date;
+      this.uniqueVisitors = todaysAnalyticObj.iplog.length;
+    }
+  }
+
+  const analyticsToSend = new PublicAnalyticObj();
+
+  res.json(analyticsToSend);
+});
+
 app.get("*", (req, res) => {
   // console.log("404 hit");
 
