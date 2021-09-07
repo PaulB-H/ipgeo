@@ -1,5 +1,5 @@
 const sendScreenSize = () => {
-  axios.get(`/screensize/${window.innerWidth}/height/${window.innerHeight}`);
+  fetch(`/screensize/${window.innerWidth}/height/${window.innerHeight}`);
 };
 sendScreenSize();
 
