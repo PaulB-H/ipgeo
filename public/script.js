@@ -1,3 +1,5 @@
+"use strict";
+
 const sendScreenSize = () => {
   fetch(`/screensize/${window.innerWidth}/height/${window.innerHeight}`);
 };
