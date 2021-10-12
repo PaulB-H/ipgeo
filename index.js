@@ -51,7 +51,7 @@ class NewSession {
   }
 }
 
-class ResourceRequest {
+class SessionResourceRequest {
   constructor(url) {
     this.url = url;
     this.timeRequested = Date.now();
