@@ -282,6 +282,10 @@ app.get("/analytics", (req, res) => {
     constructor() {
       this.date = todaysAnalyticObj.date;
       this.uniqueVisitors = todaysAnalyticObj.iplog.length;
+      this.countries = todaysAnalyticObj.countries;
+      this.totalSessions =
+        todaysAnalyticObj.activeSessions.length +
+        todaysAnalyticObj.closedSessions.length;
     }
   }
 
