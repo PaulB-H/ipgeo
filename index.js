@@ -157,7 +157,7 @@ const logResourceRequest = (clientIp, resource) => {
   );
 
   if (existingSession) {
-    let newRequest = new ResourceRequest(resource);
+    let newRequest = new SessionResourceRequest(resource);
     existingSession.sessionRequests.push(newRequest);
   }
 
