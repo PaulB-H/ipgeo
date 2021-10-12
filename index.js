@@ -20,8 +20,9 @@ class DailyAnalyticObj {
     this.date = Date.now();
     this.activeSessions = [];
     this.closedSessions = [];
-    this.resourceRequests = [];
+    // this.resourceRequests = [];
     this.iplog = [];
+    this.countries = [];
   }
 }
 
