@@ -120,6 +120,21 @@ let createNewSessionAsync = async (clientIp, browser, version, os) => {
       console.log(err);
     });
 
+  if (!todaysAnalyticObj.iplog.find((item) => item === clientIp)) {
+    todaysAnalyticObj.iplog.push(clientIp);
+
+    const existingCountryCapture = todaysAnalyticObj.countries.find(
+      (item) => item.country === country
+    );
+    if (!existingCountryCapture) {
+      let newCountryCapture = new CountryCapture(country);
+
+      todaysAnalyticObj.countries.push(newCountryCapture);
+    } else {
+      existingCountryCapture.hits++;
+    }
+  }
+
   let newSession = new NewSession(
     clientIp,
     browser,
