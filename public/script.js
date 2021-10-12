@@ -6,6 +6,8 @@ const sendScreenSize = () => {
 sendScreenSize();
 
 const fetchAnalytics = () => {
+  const analyticDataContainer = document.getElementById("analytic-data");
+
   fetch("/analytics")
     .then((res) => {
       if (res.status !== 200) {
@@ -13,7 +15,32 @@ const fetchAnalytics = () => {
       }
 
       res.json().then((data) => {
-        console.log(data);
+        let dataDate = new Date(data.date);
+
+        analyticDataContainer.innerHTML = `
+          <h3>Analytic data for: <br />${dataDate.toLocaleDateString()} <span style="white-space: nowrap">(Y-M-D)<span></h3>
+          <hr />
+          <h4>Unique visitors: ${data.uniqueVisitors}</h4>
+          <hr />
+          <h4>Countries:</h4>
+        `;
+
+        data.countries.forEach((item) => {
+          analyticDataContainer.insertAdjacentHTML(
+            "beforeend",
+            `
+            <h4>${item.country} / ${item.uniqueHits}</h4>
+          `
+          );
+        });
+
+        analyticDataContainer.insertAdjacentHTML(
+          "beforeend",
+          `
+            <hr />
+            <h4>Total Sessions: ${data.totalSessions}</h4>
+          `
+        );
       });
     })
     .catch((err) => {
