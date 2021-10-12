@@ -165,7 +165,6 @@ const logResourceRequest = (clientIp, resource) => {
 };
 
 // Session Management
-// Add IP to log
 // Check if session exists for IP in analytic object
 // If false, create new session
 // If true, check if session should be expired
