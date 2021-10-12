@@ -58,11 +58,10 @@ class SessionResourceRequest {
   }
 }
 
-class IPCapture {
-  constructor(ip) {
-    this.ip = ip;
-    this.sessions = 1;
-    this.lastVisit = Date.now();
+class CountryCapture {
+  constructor(country) {
+    this.country = country;
+    this.uniqueHits = 1;
   }
 }
 
