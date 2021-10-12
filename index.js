@@ -14,9 +14,6 @@ const serverStartDateObj = new Date();
 const serverStartDate = serverStartDateObj.toLocaleDateString();
 const serverStartTime = serverStartDateObj.toLocaleTimeString();
 
-let hasVisited;
-let lastVisited;
-
 // new daily analytic object structure
 class DailyAnalyticObj {
   constructor() {
