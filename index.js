@@ -8,7 +8,6 @@ const _ = require("lodash");
 const requestIp = require("request-ip");
 const useragent = require("express-useragent");
 const Reader = require("@maxmind/geoip2-node").Reader;
-const CronJob = require("cron").CronJob;
 
 
 let backupPath = path.join(__dirname, "analytic_backups");
@@ -147,18 +146,4 @@ app.listen(8090, () => {
   console.log("server up on 8090");
 });
 
-// crontab.cronhub.io
-const fiveMinBackup = new CronJob("0 */5 * * * *", () => {
-  fs.writeFile(
-    path.join(__dirname, "analytic_backups", "analytic_data.json"),
-    JSON.stringify(todaysAnalyticObj),
-    (err) => {
-      if (err) {
-        console.log("Err writing 5 min backup, exiting");
-        process.exit();
-      }
-      console.log("Backup wrote");
-    }
-  );
-});
-fiveMinBackup.start();
+require("./cron");
