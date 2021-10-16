@@ -1,4 +1,3 @@
-const _ = require("lodash");
 const Reader = require("@maxmind/geoip2-node").Reader;
 
 class DailyAnalyticObj {

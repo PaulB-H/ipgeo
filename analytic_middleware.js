@@ -5,8 +5,6 @@
 // --> If not expired, update session last action time
 
 const requestIp = require("request-ip");
-const useragent = require("express-useragent");
-const Reader = require("@maxmind/geoip2-node").Reader;
 
 let { todaysAnalyticObj, createNewSessionAsync } = require("./analytic_main");
 
