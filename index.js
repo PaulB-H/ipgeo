@@ -9,40 +9,7 @@ const requestIp = require("request-ip");
 const useragent = require("express-useragent");
 const Reader = require("@maxmind/geoip2-node").Reader;
 
-
-let backupPath = path.join(__dirname, "analytic_backups");
-
-if (!fs.existsSync(backupPath)) {
-  // console.log("analytic_backups dir not found, creating...");
-
-  fs.mkdirSync(backupPath);
-
-  console.log(`analytic_backups dir created at ${backupPath}`);
-} else {
-  // console.log(`analytic_backups dir already exists at ${backupPath}`);
-
-  if (!fs.existsSync(path.join(backupPath, "analytic_data.json"))) {
-    console.log("No existing backup found");
-  } else {
-    // console.log("Existing backup found, attempting to read...");
-
-    let previousBackupJSON = fs.readFileSync(
-      path.join(backupPath, "analytic_data.json")
-    );
-
-    try {
-      let previousBackupParse = JSON.parse(previousBackupJSON);
-
-      // console.log("Data read and parsed");
-
-      todaysAnalyticObj = previousBackupParse;
-    } catch (err) {
-      // console.error("Err parsing JSON... Exiting");
-
-      process.exit();
-    }
-  }
-}
+require("./backup_loader");
 
 app.use(useragent.express());
 
