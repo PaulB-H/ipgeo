@@ -2,8 +2,7 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 
-let { todaysAnalyticObj } = require("./analytic_main");
-const { logResourceRequest } = require("./analytic_main");
+const { todaysAnalyticObj, logResourceRequest } = require("./analytic_main");
 
 router.get("/", (req, res) => {
   // const clientIp = requestIp.getClientIp(req); // FOR PROD

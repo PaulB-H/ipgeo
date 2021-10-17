@@ -6,7 +6,7 @@
 
 const requestIp = require("request-ip");
 
-let { todaysAnalyticObj, createNewSessionAsync } = require("./analytic_main");
+const { todaysAnalyticObj, createNewSessionAsync } = require("./analytic_main");
 
 module.exports = async function sessionManagement(req, res, next) {
   const { browser, version, os } = req.useragent;

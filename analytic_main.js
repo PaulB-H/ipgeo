@@ -11,7 +11,7 @@ class DailyAnalyticObj {
   }
 }
 
-let todaysAnalyticObj = new DailyAnalyticObj();
+const todaysAnalyticObj = new DailyAnalyticObj();
 
 class NewSession {
   constructor(ip, browser, browserVersion, os, country, city, lat, lon) {

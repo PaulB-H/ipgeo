@@ -1,8 +1,8 @@
 const path = require("path");
 const fs = require("fs");
-let { todaysAnalyticObj } = require("./analytic_main");
+const { todaysAnalyticObj } = require("./analytic_main");
 
-let backupPath = path.join(__dirname, "analytic_backups");
+const backupPath = path.join(__dirname, "analytic_backups");
 
 if (!fs.existsSync(backupPath)) {
   // Backup dir does NOT exist
