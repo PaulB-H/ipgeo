@@ -27,7 +27,7 @@ if (!fs.existsSync(backupPath)) {
     try {
       let previousBackupParse = JSON.parse(previousBackupJSON);
 
-      todaysAnalyticObj = previousBackupParse;
+      Object.assign(todaysAnalyticObj, previousBackupParse);
 
       console.log("Data read and parsed");
     } catch (err) {
