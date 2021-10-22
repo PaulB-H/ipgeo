@@ -9,6 +9,13 @@ class DailyAnalyticObj {
     this.iplog = [];
     this.countries = [];
   }
+  clearFields = () => {
+    this.date = Date.now();
+    this.activeSessions = [];
+    this.closedSessions = [];
+    this.iplog = [];
+    this.countries = [];
+  };
 }
 
 const todaysAnalyticObj = new DailyAnalyticObj();
