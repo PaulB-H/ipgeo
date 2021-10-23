@@ -7,6 +7,8 @@ sendScreenSize();
 
 const fetchAnalytics = () => {
   const analyticDataContainer = document.getElementById("analytic-data");
+  const previousDataList = document.getElementById("previous-data-list");
+  const myDataContainer = document.getElementById("my-data");
 
   fetch("/analytics")
     .then((res) => {
@@ -41,6 +43,24 @@ const fetchAnalytics = () => {
             <h4>Total Sessions: ${data.totalSessions}</h4>
           `
         );
+
+        data.existingBackupArray.forEach((item) => {
+          previousDataList.insertAdjacentHTML(
+            "beforeend",
+            `
+              <div id="${item}" onclick="fetchPreviousAnalytics('${item}')" class="previous-data-item card">${item}</div>
+            `
+          );
+        });
+
+        data.useragentDataArr.forEach((item) => {
+          myDataContainer.insertAdjacentHTML(
+            "beforeend",
+            `
+              <p>${item}</p>
+            `
+          );
+        });
       });
     })
     .catch((err) => {
