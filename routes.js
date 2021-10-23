@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 
+const { fileArray } = require("./backup_loader.js");
 const { todaysAnalyticObj, logResourceRequest } = require("./analytic_main");
 
 router.get("/", (req, res) => {
@@ -64,10 +65,20 @@ router.get("/analytics", (req, res) => {
       this.totalSessions =
         todaysAnalyticObj.activeSessions.length +
         todaysAnalyticObj.closedSessions.length;
+      this.useragentDataArr = [];
+      this.existingBackupArray = fileArray;
     }
   }
 
   const analyticsToSend = new PublicAnalyticObj();
+
+  for (const property in req.useragent) {
+    if (req.useragent[property] === true) {
+      analyticsToSend.useragentDataArr.push(property);
+    } else if (typeof req.useragent[property] === "string") {
+      analyticsToSend.useragentDataArr.push(req.useragent[property]);
+    }
+  }
 
   res.json(analyticsToSend);
 });
