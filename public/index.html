@@ -16,36 +16,33 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header class="card">
-      <h3 style="text-decoration: underline; margin-bottom: 20px">
-        ipgeo & analytics
-      </h3>
-      <p>Building my own analytics system</p>
-      <br />
-      <p>
-        Server side IP-Geolocation with <br />
-        <a
-          href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en"
-          target="_blank"
-          >Maxmind GeoLite2 Databases</a
-        >
-      </p>
-      <br />
-      <h4>
-        Find the code on GitHub: <br />
-        <a href="https://github.com/paulb-h/ipgeo" target="_blank">
-          github.com/paulb-h/ipgeo
-        </a>
-      </h4>
-    </header>
     <main>
+      <header class="card">
+        <h3 style="text-decoration: underline; margin-bottom: 20px">
+          ipgeo & analytics
+        </h3>
+        <p>Building my own analytics system</p>
+        <br />
+        <p>
+          Server side IP-Geolocation with <br />
+          <a
+            href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data?lang=en"
+            target="_blank"
+          >
+            Maxmind GeoLite2 Databases
+          </a>
+        </p>
+        <br />
+        <h4>
+          Find the code on GitHub: <br />
+          <a href="https://github.com/paulb-h/ipgeo" target="_blank">
+            github.com/paulb-h/ipgeo
+          </a>
+        </h4>
+      </header>
+
       <section id="my-data" class="card">
-        <h3>My data:</h3>
-        <strike>
-          <p>Tap to reveal IP</p>
-          <p>Browser: /browser/</p>
-          <p>Device type: /mobile-browser-desktop</p>
-        </strike>
+        <h3>Your user-agent data:</h3>
       </section>
 
       <section id="todays-analytic-data" class="card">
@@ -59,11 +56,7 @@
           <h3>Previous Data</h3>
           <p>Data for other days found, select a date below to view:</p>
         </div>
-        <div id="previous-data-list">
-          <div class="previous-data-item card">DD/MM/YY</div>
-          <div class="previous-data-item card">DD/MM/YY</div>
-          <div class="previous-data-item card">DD/MM/YY</div>
-        </div>
+        <div id="previous-data-list"></div>
       </section>
     </main>
 
