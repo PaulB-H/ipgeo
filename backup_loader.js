@@ -37,3 +37,15 @@ if (!fs.existsSync(backupPath)) {
     }
   }
 }
+
+const fileArray = fs.readdirSync(
+  path.join(__dirname, "analytic_backups", "previous_days")
+);
+fileArray.forEach((item, index) => {
+  fileArray[index] = item.slice(0, item.length - 5);
+});
+
+console.log("Previous backups found for...");
+console.log(fileArray);
+
+module.exports = { fileArray };
