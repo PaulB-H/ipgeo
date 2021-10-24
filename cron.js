@@ -42,6 +42,9 @@ const dailyBackup = new CronJob("59 59 23 * * *", () => {
         process.exit();
       }
       console.log("Daily backup wrote");
+
+      todaysAnalyticObj.clearFields();
+      console.log("Reset todaysAnalyticObj");
     }
   );
 });
