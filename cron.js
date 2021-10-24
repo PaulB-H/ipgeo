@@ -4,11 +4,19 @@ const path = require("path");
 
 const { todaysAnalyticObj } = require("./analytic_main");
 
-// !! ==> Changed to every 5 seconds for dev  <== !! \\
-// crontab.cronhub.io - easy cron creation \\
+const rootBackupDir = path.join(__dirname, "analytic_backups");
+const previousDaysDir = path.join(
+  __dirname,
+  "analytic_backups",
+  "previous_days"
+);
+
+// !! ==> Currently every 5 seconds for testing
+// crontab.cronhub.io
+// Second, Minute, Hour, Day of Month, Month, Day of Week
 const fiveMinBackup = new CronJob("0/5 * * * * *", () => {
   fs.writeFile(
-    path.join(__dirname, "analytic_backups", "analytic_data.json"),
+    path.join(rootBackupDir, "daily_analytics.json"),
     JSON.stringify(todaysAnalyticObj),
     (err) => {
       if (err) {
@@ -21,16 +29,12 @@ const fiveMinBackup = new CronJob("0/5 * * * * *", () => {
 });
 fiveMinBackup.start();
 
-// 59 seconds past the minute
-// 59 minutes past the hour
-// every 23 hours
-const dailyBackup = new CronJob("59 59 */23 * * *", () => {
+// This will run at: (second: 59, minute: 59, hour: 23)
+const dailyBackup = new CronJob("59 59 23 * * *", () => {
+  const currentDateString = new Date().toLocaleDateString();
+
   fs.writeFile(
-    path.join(
-      __dirname,
-      "analytic_backups",
-      `${new Date().toLocaleDateString()}.json`
-    ),
+    path.join(previousDaysDir, `${currentDateString}.json`),
     JSON.stringify(todaysAnalyticObj),
     (err) => {
       if (err) {
@@ -41,5 +45,4 @@ const dailyBackup = new CronJob("59 59 */23 * * *", () => {
     }
   );
 });
-
 dailyBackup.start();
