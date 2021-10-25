@@ -28,7 +28,7 @@ main {
   -webkit-box-shadow: 0px 0px 15px 5px #000000;
   box-shadow: 0px 0px 15px 5px #000000;
   border-radius: 2px;
-  max-width: 275px;
+  width: 275px;
 }
 
 #previous-data {
