@@ -36,14 +36,14 @@ if (!fs.existsSync(rootBackupDir)) {
   }
 
   try {
-    fs.mkdirSync(publicDailyDir);
+    fs.mkdirSync(publicDailyDir, { recursive: true });
   } catch (err) {
     console.log("Err creating public data dir's, exiting...");
     console.log(`err.msg: ${err.message}`);
     process.exit();
   }
 
-  console.log("Directory structure created");
+  console.log("Complete directory structure created");
 } else {
   console.log(`analytic_backups dir already exists...`);
 
