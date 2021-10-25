@@ -10,7 +10,7 @@ const fetchAnalytics = () => {
   const previousDataList = document.getElementById("previous-data-list");
   const myDataContainer = document.getElementById("my-data");
 
-  fetch("/analytics")
+  fetch("/todaysanalytics")
     .then((res) => {
       if (res.status !== 200) {
         return console.log(`err: ${res.status}`);
@@ -43,8 +43,19 @@ const fetchAnalytics = () => {
             <h4>Total Sessions: ${data.totalSessions}</h4>
           `
         );
+      });
+    })
+    .catch((err) => {
+      console.log("Fetch Error :-S", err);
+    });
 
-        data.existingBackupArray.forEach((item) => {
+  fetch("/previousdates").then((res) => {
+    if (res.status !== 200) {
+      return console.log(`err: ${res.status}`);
+    }
+    res.json().then((data) => {
+      if (data.length >= 1) {
+        data.forEach((item) => {
           previousDataList.insertAdjacentHTML(
             "beforeend",
             `
@@ -52,20 +63,35 @@ const fetchAnalytics = () => {
             `
           );
         });
+      } else {
+        document.getElementById("previous-data").firstElementChild.innerHTML =
+          "No previous data found";
+      }
+    });
+  });
 
-        data.useragentDataArr.forEach((item) => {
-          myDataContainer.insertAdjacentHTML(
-            "beforeend",
-            `
-              <p>${item}</p>
-            `
-          );
-        });
+  fetch("/useragent").then((res) => {
+    if (res.status !== 200) {
+      return console.log(`err: ${res.status}`);
+    }
+    res.json().then((data) => {
+      data.forEach((item) => {
+        myDataContainer.insertAdjacentHTML(
+          "beforeend",
+          `
+            <p>${item}</p>
+          `
+        );
+      });
+    });
+  });
+};
+
+fetchAnalytics();
+
       });
     })
     .catch((err) => {
       console.log("Fetch Error :-S", err);
     });
 };
-
-fetchAnalytics();
