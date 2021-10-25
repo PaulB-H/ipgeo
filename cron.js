@@ -56,6 +56,30 @@ fiveMinBackup.start();
 const dailyBackup = new CronJob("59 59 23 * * *", () => {
   const currentDateString = new Date().toLocaleDateString();
 
+  class PublicAnalyticObj {
+    constructor() {
+      this.date = todaysAnalyticObj.date;
+      this.uniqueVisitors = todaysAnalyticObj.iplog.length;
+      this.countries = todaysAnalyticObj.countries;
+      this.totalSessions =
+        todaysAnalyticObj.activeSessions.length +
+        todaysAnalyticObj.closedSessions.length;
+    }
+  }
+
+  const analyticsToSend = new PublicAnalyticObj();
+
+  try {
+    fs.writeFileSync(
+      path.join(publicDailyDir, `public_${currentDateString}.json`),
+      JSON.stringify(analyticsToSend)
+    );
+  } catch (err) {
+    console.log("Err writing daily public backup, exiting");
+    process.exit();
+  }
+  console.log("Daily public backup wrote");
+
   fs.writeFile(
     path.join(previousDaysDir, `${currentDateString}.json`),
     JSON.stringify(todaysAnalyticObj),
