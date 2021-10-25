@@ -5,6 +5,13 @@ const router = express.Router();
 const { fileArray } = require("./backup_loader.js");
 const { todaysAnalyticObj, logResourceRequest } = require("./analytic_main");
 
+const rootBackupDir = path.join(__dirname, "analytic_backups");
+const publicDailyAnalyticsPath = path.join(
+  rootBackupDir,
+  "public_data",
+  "public_daily_analytics.json"
+);
+
 router.get("/", (req, res) => {
   // const clientIp = requestIp.getClientIp(req); // FOR PROD
   const clientIp = process.env.TEST_IPADDRESS; // FOR DEV
@@ -56,27 +63,27 @@ router.get("/screensize/:width/height/:height", (req, res) => {
   res.end();
 });
 
-router.get("/analytics", (req, res) => {
-  class PublicAnalyticObj {
-    constructor() {
-      this.date = todaysAnalyticObj.date;
-      this.uniqueVisitors = todaysAnalyticObj.iplog.length;
-      this.countries = todaysAnalyticObj.countries;
-      this.totalSessions =
-        todaysAnalyticObj.activeSessions.length +
-        todaysAnalyticObj.closedSessions.length;
-      this.useragentDataArr = [];
-      this.existingBackupArray = fileArray;
-    }
-  }
+router.get("/todaysanalytics", (req, res) => {
+  res.sendFile(publicDailyAnalyticsPath);
+});
 
-  const analyticsToSend = new PublicAnalyticObj();
+router.get("/previousdates", (req, res) => {
+  res.json(fileArray);
+});
+
+router.get("/useragent", (req, res) => {
+  const useragentDataArr = [];
 
   for (const property in req.useragent) {
     if (req.useragent[property] === true) {
-      analyticsToSend.useragentDataArr.push(property);
+      useragentDataArr.push(property);
     } else if (typeof req.useragent[property] === "string") {
-      analyticsToSend.useragentDataArr.push(req.useragent[property]);
+      useragentDataArr.push(req.useragent[property]);
+    }
+  }
+
+  res.json(useragentDataArr);
+});
     }
   }
 
