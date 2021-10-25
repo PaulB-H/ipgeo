@@ -84,11 +84,6 @@ router.get("/useragent", (req, res) => {
 
   res.json(useragentDataArr);
 });
-    }
-  }
-
-  res.json(analyticsToSend);
-});
 
 router.get("*", (req, res) => {
   // console.log("404 hit");
