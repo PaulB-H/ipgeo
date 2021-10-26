@@ -88,10 +88,3 @@ const fetchAnalytics = () => {
 };
 
 fetchAnalytics();
-
-      });
-    })
-    .catch((err) => {
-      console.log("Fetch Error :-S", err);
-    });
-};
