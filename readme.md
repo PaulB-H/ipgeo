@@ -1,6 +1,6 @@
 <h1>IP Geo + Analytics</h1>
 
-<img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/ipgeo.png" />
+<img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/readme_images/ipgeo.png" />
 
 <h5>HTML, CSS, JS, Node.JS</h5>
 
@@ -16,7 +16,17 @@
 <p>Creating my own analytic system, with server-side IP geo-location</p>
 
 <h2>Details</h2>
-<p>More details to come...</p>
+
+<h4>Rough Version</h4>
+<img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/readme_images/rough.PNG" />
+
+<h4>Current progress</h4>
+<img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/readme_images/progress.PNG" />
+
+<h4>Example of startup logging where a backup file was found with data from a previous day</h4>
+<img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/readme_images/startup.PNG" />
+
+<p>More to come...</p>
 
 <h2>Libraries / Frameworks / Packages</h2>
 <ul>
