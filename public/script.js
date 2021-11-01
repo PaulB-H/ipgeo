@@ -5,6 +5,33 @@ const sendScreenSize = () => {
 };
 sendScreenSize();
 
+const fetchPreviousAnalytics = (datestring) => {
+  fetch(`/previousBackup/${datestring}`)
+    .then((res) => {
+      if (res.status !== 200) {
+        return console.log(`err status: ${res.status}`);
+      }
+
+      res.json().then((data) => {
+        const elem = document.getElementById(`${datestring}`);
+
+        elem.innerHTML = `
+          ${new Date(data.date).toLocaleDateString()}<br />
+          Unique Visitors: ${data.uniqueVisitors}\n
+          Unique Countries: ${
+            data.countries
+              ? `${data.countries.length}`
+              : "<br /><p style='font-weight: bold'>no country data</p>"
+          }
+        `;
+      });
+    })
+    .catch((err) => {
+      console.log("Fetch Error :-S", err);
+    });
+};
+
+let dateArray;
 const fetchAnalytics = () => {
   const analyticDataContainer = document.getElementById("analytic-data");
   const previousDataList = document.getElementById("previous-data-list");
@@ -55,6 +82,12 @@ const fetchAnalytics = () => {
     }
     res.json().then((data) => {
       if (data.length >= 1) {
+        dateArray = data;
+
+        dateArray.forEach((item) => {
+          fetchPreviousAnalytics(item);
+        });
+
         data.forEach((item) => {
           previousDataList.insertAdjacentHTML(
             "beforeend",
