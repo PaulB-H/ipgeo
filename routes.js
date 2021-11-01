@@ -1,4 +1,5 @@
 const path = require("path");
+const { fs, access, constants } = require("fs");
 const express = require("express");
 const router = express.Router();
 
@@ -6,9 +7,10 @@ const { fileArray } = require("./backup_loader.js");
 const { todaysAnalyticObj, logResourceRequest } = require("./analytic_main");
 
 const rootBackupDir = path.join(__dirname, "analytic_backups");
+const publicRootDir = path.join(rootBackupDir, "public_data");
+const publicDailyDir = path.join(publicRootDir, "previous_days_public");
 const publicDailyAnalyticsPath = path.join(
-  rootBackupDir,
-  "public_data",
+  publicRootDir,
   "public_daily_analytics.json"
 );
 
@@ -83,6 +85,32 @@ router.get("/useragent", (req, res) => {
   }
 
   res.json(useragentDataArr);
+});
+
+router.get("/previousBackup/:date", (req, res) => {
+  if (req.params.date.length !== 10) {
+    res.status(400);
+    res.json({ err: "Date incorrect length" });
+  } else {
+    const requestPath = path.join(
+      publicDailyDir,
+      `public_${req.params.date}.json`
+    );
+
+    access(requestPath, constants.F_OK | constants.R_OK, (err) => {
+      if (err) {
+        if (err.code === "ENOENT") {
+          res.status(404);
+          res.json({ err: "File not found" });
+        } else {
+          res.status(500);
+          res.json({ err: "File not readable" });
+        }
+      } else {
+        res.sendFile(requestPath);
+      }
+    });
+  }
 });
 
 router.get("*", (req, res) => {
