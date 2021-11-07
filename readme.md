@@ -9,13 +9,15 @@
     Live site link
     </a></strike>
   <br />
-  <sup><small>Not up yet!</small></sup>
+  <sup><small>Not up yet! - Work in Progress!</small></sup>
 </p>
 
 <h2>Description</h2>
 <p>Creating my own analytic system, with server-side IP geo-location</p>
 
 <h2>Details</h2>
+
+<p>**Currently I am only logging information based off of request IP address, which will not give accurate data when multiple people are on one network. I should be able to easily add a token || cookie client side on session start to identify users on the same network, or use a lib like express-session for this.</p>
 
 <h4>Rough Version</h4>
 <img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/readme_images/rough.PNG" />
