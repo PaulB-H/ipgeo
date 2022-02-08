@@ -1,3 +1,6 @@
+<p>On hold...</p>
+<p>I started this without maybe a clear enough direction or understanding of what I needed to do. At this point I think it will be easier to start fresh than try and rebuild this /shrug</p>
+
 <h1>IP Geo + Analytics</h1>
 
 <img src="https://raw.githubusercontent.com/PaulB-H/ipgeo/main/readme_images/ipgeo.png" />
